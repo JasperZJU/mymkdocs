@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>用二端口网络解释拆环 - Jasper's Notes</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/purebasic.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">Jasper's Notes</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">主页</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">微电子电路随笔</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../" class="dropdown-item">介绍</a>
+</li>
+                                    
+<li>
+    <a href="../../../BJTFET.md" class="dropdown-item">三极管和FET为什么能工作</a>
+</li>
+                                    
+<li>
+    <a href="../../../Smallsignal.md" class="dropdown-item">小信号的重要性</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">用二端口网络解释拆环</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">运用二端口网络解释拆环</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#11-h" class="nav-link">1.1 混合参数（H参数）</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#12-g" class="nav-link">1.2 混合参数（G参数）</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#13-z" class="nav-link">1.3 阻抗参数（Z参数）</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#14-y" class="nav-link">1.4 导纳参数（Y参数）</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#15" class="nav-link">1.5 总结</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="_1">运用二端口网络解释拆环</h1>
+<p>为了更好地了解拆环背后的原理，我阅读了《Fundamentals of Electric Circuits》的第19章“Two-Port Networks”，自学了二端口网络的相关知识后，决定从“混合参数”（H参数）、“导纳参数（Y参数）”、“阻抗参数（Z参数）”用来解释拆环方法：</p>
+<ul>
+<li>
+<p>画输入，看输出：输出端如果是电压采样，则将输出端对地短路；输出端如果是电流采样，则将输出端开路。</p>
+</li>
+<li>
+<p>画输出，看输入：输入端如果是并联接入，则将输入端对地短路；输入端如果是串联接入，则将输入端开路。</p>
+</li>
+</ul>
+<p>这个拆环方法整体上可以总结为：</p>
+<ul>
+<li>并联接法的，则将两端短路。</li>
+<li>串联解法的，则将两端开路。</li>
+</ul>
+<p>下面我将从二端口网络出发，解释开环方法的原理。</p>
+<h2 id="11-h">1.1 混合参数（H参数）</h2>
+<p>H参数将用来解释电压串联负反馈的拆环原理。
+首先考虑如下的二端源网络：</p>
+<p><img alt="Two-port Network" src="../image.png" /></p>
+<p>用H参数描述的公式如下：</p>
+<p><img alt="H参数" src="../image-1.png" /></p>
+<p>其中，(h_{11})(h_{12})(h_{21})(h_{22})可以通过如下表达式求出：</p>
+<p><img alt="求h参" src="image-3.png" /></p>
+<p>从中可以看出，(h_{11})的量纲与电阻相同，(h_{22})的量纲与电导相同，于是可以运用戴维南等效与诺顿等效的表示方法，将该二端口网络等效为如下形式：</p>
+<p><img alt="H-equivalent" src="../image-2.png" /></p>
+<p>若将右端看作反馈电路的输入端，将左端看作反馈电路的输出端，其中，电导(h_{22})所对应的电阻两端的电压即为(V2)，整个反馈电路则可以看作输入(V_{2})的电压，输出(V_{1})的电压。所以若将这个反馈电路接入放大电路，则可以看作是一个电压串联负反馈。从接入方式上来看，放大器输入端反馈电路串联的接法与戴维南等效相对应，而输出端反馈电路并联的接法也与诺顿等效相对应。
+因此整个放大器+反馈回路可以等效为如下的电路：</p>
+<p><img alt="等效1" src="../3fc6a87751e0b784a85572894c35baa.jpg" /></p>
+<p>值得一提的是，从等效图中我们也能看到放大器的输入端通过反馈网络对放大器的输出端产生影响（(h_{21}I_{1})）。通过二端口网络等效的方法，我们就可以得出反馈网络的输入电阻和输出电阻的大小，从图中可以得出：</p>
+<p>[R_{F,out}=h_{11}]</p>
+<p>[R_{F,in}=\frac{1}{h_{22}}]</p>
+<p>到这里我们已经利用二端口网络的等效初步完成了拆环。接下来，为了考虑反馈电路对放大器输入输出电阻的加载效应，我们将(h_{11})和(h_{22})分别放入放大器的输入与输出回路，就得到了如下图所示的电路：
+<img alt="等效2" src="../image-5.png" />
+到这一步我们就已经实现了将原电路等效为理想的反馈电路结构。但是请注意，因为此时反馈网络的输入电流与输出电压都已经发生了改变，所以事实上反馈网络与反馈因子都发生了改变，与原有的反馈网络并不等价。不过在接下来的证明中我们可以说明反馈因子在这个转换的过程中近似不变。
+<strong>证明：</strong></p>
+<p><img alt="proof" src="../3eeb16edb30c0f3f1d51b1126f189b1.jpg" /></p>
+<p><em>证明1：</em> 对比上图所示转换前和转换后的反馈系数，转换前的反馈因子多了一个(I_1)的影响。然而，对于一般的放大器，其(R_{in})一般较大，这就使得(I_{1})较小，可以近似认为趋于0，那么转换前后的反馈系数就可以近似认为不变。
+<em>证明2：</em> 若从反馈网络自身的角度看，由于在反馈网络中，我们更关注放大器输出端对输入端的反馈作用，进而可以忽略放大器的输入端通过反馈网络对放大器的输出端产生的影响，所以可以近似认为(I_{1}=0)，那么反馈系数也近似不变。
+<strong>证毕</strong>
+于是我们完成了在不考虑信号源内阻和负载时的拆环，并且确保了在这个过程中反馈因子基本不变。若考虑负载与信号源电阻的影响，就得到了《Microelectronics Circuits》中P832的图（b），其中，(R_{11})对应于(h_{11})(即(R_{F,out}))，(R_{22})对应于(\frac{1}{h_{22}})(即(R_{F,in}))。至此也就完成了拆环。
+<img alt="P832 b" src="../image-6.png" />
+接下来的一步是求出(h_{11})与(h_{22})。若能求出，则求出了(R_{11})与(R_{22})。回顾在二端口网络中求(h_{11})与(h_{22})的方法：
+<img alt="求h参" src="image-3.png" />
+从上述式子中可以得出，求(h_{11})时，要求(V_{2}=0)，即另一端短接；求(h_{22})时，要求(I_{1}=0)，即另一端开路。这也就对应了：</p>
+<ul>
+<li>
+<p>画输入，看输出：输出端如果是电压采样（并联接入），则将输出端对地短路；输出端如果是电流采样（串联接入），则将输出端开路。</p>
+</li>
+<li>
+<p>画输出，看输入：输入端如果是并联接入，则将输入端对地短路；输入端如果是串联接入，则将输入端开路。</p>
+</li>
+</ul>
+<p>这一方法对应于《Microelectronics Circuits》中P832的图（c）：
+<img alt="P832 c" src="../image-7.png" /></p>
+<p>至此，通过二端口网络中的H参数，我们解释了电压串联负反馈的拆环原理。</p>
+<h2 id="12-g">1.2 混合参数（G参数）</h2>
+<p>G参数将用来解释电流并联负反馈的拆环原理。
+若将二端口网络的左端用诺顿等效，右端用戴维南等效，则可以将二端口电路等效为如下电路：
+<img alt="g参等效" src="../image-8.png" />
+此时(V_{1})(I_{1})(V_{2})(I_{2})满足用G参数描述的方程组：
+<img alt="g参" src="../image-10.png" />
+<img alt="求g参" src="../image-9.png" />
+仿照1.1中的讨论，该二端口网络可以描述电流并联负反馈的反馈网络，反馈输入端（右端）输入大小为(I_{2})的电流，反馈输出端输出大小为(-I_{1})的电流。将该二端口反馈网络接入如《Microelectronics Circuits》中P866的图（a）所示的放大器：
+<img alt="P866 a" src="../image-11.png" />
+则可以得到如P865和P866所示的放大电路与反馈电路：
+<img alt="放大" src="../image-12.png" />
+<img alt="反馈电路" src="../image-13.png" />
+接法为电流并联接入。其中，(R_{11})对应于二端口网络中的(\frac{1}{g_{11}}),(R_{22})对应于二端口网络中的({g_{22}})。与在1.1中(I_{1})近似为0相似，在这里我们将(V_{1})近似为0（忽略放大器输入端通过反馈对放大器输出端的影响）（这也并联接入之后输入电阻因并联而大幅度减小相对应）。由({g_{22}})(g_{11})的求法可知，求({g_{22}})，需使(V_{1}=0)，即反馈输出端短路；求({g_{11}})，需使(I_{2}=0)，即反馈输入端开路，这也正反映了开环的方法：</p>
+<ul>
+<li>
+<p>画输入，看输出：输出端如果是电压采样（并联接入），则将输出端对地短路；输出端如果是电流采样（串联接入），则将输出端开路。</p>
+</li>
+<li>
+<p>画输出，看输入：输入端如果是并联接入，则将输入端对地短路；输入端如果是串联接入，则将输入端开路。</p>
+</li>
+</ul>
+<h2 id="13-z">1.3 阻抗参数（Z参数）</h2>
+<p>Z参数将用来解释电流串联负反馈的拆环原理。
+Z参数的定义为：
+<img alt="z参定义" src="../image-14.png" />
+其中参数的求法为：
+<img alt="求z参数" src="../image-15.png" />
+因此其等效电路可以表示为：
+<img alt="Z等效" src="../image-16.png" />
+由Z参数的求法可知，(z_{11})，(z_{22})的量纲均与电阻相同，所以可以看作电阻。等效电路两端均采用戴维南等效。若将该二端口网络作为反馈网络接入如《Microelectronics Circuits》中P845的图（a）所示的放大器（电流串联负反馈）：
+<img alt="P845 a" src="../image-17.png" />
+则可以得到如P846和P845所示的放大电路与反馈电路：
+<img alt="放大" src="../image-18.png" />
+<img alt="反馈" src="../image-19.png" />
+其中，(R_{11})对应于二端口网络中的(z_{11}),(R_{22})对应于二端口网络中的(z_{22})。与在1.1中(I_{1})近似为0相似，在这里我们将(I_{1})近似为0（忽略放大器输入端通过反馈对放大器输出端的影响）（这也与放大器输入电阻较大导致输入电流趋于0相对应）。由({z_{22}})(z_{11})的求法可知，求({z_{22}})，需使(I_{1}=0)，即反馈输出端开路；求({z_{11}})，需使(I_{2}=0)，即反馈输入端开路，这也正反映了开环的方法：</p>
+<ul>
+<li>
+<p>画输入，看输出：输出端如果是电压采样（并联接入），则将输出端对地短路；输出端如果是电流采样（串联接入），则将输出端开路。</p>
+</li>
+<li>
+<p>画输出，看输入：输入端如果是并联接入，则将输入端对地短路；输入端如果是串联接入，则将输入端开路。</p>
+</li>
+</ul>
+<h2 id="14-y">1.4 导纳参数（Y参数）</h2>
+<p>Y参数将用来解释电压并联负反馈的拆环原理。
+Y参数的定义为：
+<img alt="Y参数" src="../image-20.png" />
+Y参数的求法为：
+<img alt="求Y参" src="../image-21.png" />
+Y参数的等效电路如下：
+<img alt="Y参等效" src="../image-22.png" />
+由Y参数的求法可知，(y_{11})，(y_{22})的量纲均与电导，所以等效电路两端均采用诺顿等效。若将该二端口网络作为反馈网络接入如《Microelectronics Circuits》中P857的图（a）所示的放大器（电压并联负反馈）：
+<img alt="P857 a" src="../image-23.png" />
+则可以得到如P857和P856所示的放大电路与反馈电路：
+<img alt="alt text" src="../image-24.png" />
+<img alt="alt text" src="../image-25.png" />
+其中，(R_{11})对应于二端口网络中的(\frac{1}{z_{11}}),(R_{22})对应于二端口网络中的(\frac{1}{z_{22}})。与在1.2中(V_{1})近似为0相似，在这里我们将(V_{1})近似为0（忽略放大器输入端通过反馈对放大器输出端的影响）（这也并联接入之后输入电阻因并联而大幅度减小相对应）。由({g_{22}})(g_{11})的求法可知，求({g_{22}})，需使(V_{1}=0)，即反馈输出端短路；求({g_{11}})，需使(V_{2}=0)，即反馈输入端短路，这也正反映了开环的方法：</p>
+<ul>
+<li>
+<p>画输入，看输出：输出端如果是电压采样（并联接入），则将输出端对地短路；输出端如果是电流采样（串联接入），则将输出端开路。</p>
+</li>
+<li>
+<p>画输出，看输入：输入端如果是并联接入，则将输入端对地短路；输入端如果是串联接入，则将输入端开路。</p>
+</li>
+</ul>
+<h2 id="15">1.5 总结</h2>
+<p>综上所述，利用二端口网络拆环的方法可以看作现根据反馈网络与放大器的连接方式（并联——诺顿等效；串联——戴维南等效）确定等效电路及其二端口参数。接入之后，需要对电路做一个近似等效，得到放大器与反馈网络的理想结构（ideal structure）：</p>
+<ul>
+<li>电压串联（Series-Shunt）：
+<img alt="alt text" src="../image-26.png" /></li>
+<li>电流串联（Series-Series）：
+<img alt="alt text" src="../image-27.png" /></li>
+<li>电压并联（Shunt-Shunt）：
+<img alt="alt text" src="../image-28.png" /></li>
+<li>电流并联（Shunt-Series）：
+<img alt="alt text" src="../image-29.png" /></li>
+</ul>
+<p>端口的等效方式（诺顿等效/戴维南等效）决定了(R_{F,out})与(R_{F,in})是并联还是串联接入，而其求法取决于其二端口网络参数的求法。正是这求法决定了《Microelectronics Circuits》介绍的开环的方法。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
