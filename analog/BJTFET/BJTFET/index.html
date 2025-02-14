@@ -396,9 +396,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-bjt" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
-      1. BJT
+      1.一点点半导体物理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.一点点半导体物理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-pn" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 pn结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 电流密度与浓度梯度的关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 浓度表达式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-bjt" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. BJT
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3fet" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.FET
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.总结
     </span>
   </a>
   
@@ -491,9 +551,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-bjt" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
-      1. BJT
+      1.一点点半导体物理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.一点点半导体物理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-pn" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 pn结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 电流密度与浓度梯度的关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 浓度表达式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-bjt" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. BJT
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3fet" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.FET
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.总结
     </span>
   </a>
   
@@ -520,11 +640,99 @@
 
 <h1 id="fet">三极管与FET的工作原理浅谈</h1>
 <p>关于BJT和FET的原理，若要从半导体物理从头讲起，是非常复杂的，在本部分也不会涉及。即使是完全按照《Microelectronics Circuits》这本书的内容来讲，也非常复杂，涉及许多公式。所以在笔者所修读的电基课程中，关于BJT与FET原理的介绍，仅是浅浅带过；单从电路分析的角度看，笔者也认为没有必要对原理有一个比较详细的描述：得到一个简化的大信号与小信号的电路等效模型其实更为重要。然而，既然这是随笔，我觉得还是有必要浅谈一下，了解原理也对理解电路模型的推导有帮助。</p>
-<p>当然，这只是浅谈，或者说，只是笔者想用自己的理解去解释《Microelectronics Circuits》关于BJT与FET原理介绍的部分。关于详细的介绍，笔者强烈建议自己去看书：这里的理解更有可能是误人子弟。</p>
-<h2 id="1-bjt">1. BJT</h2>
+<p>当然，这只是浅谈，或者说，只是笔者想用自己的理解去解释《Microelectronics Circuits》关于BJT与FET原理介绍的部分。（因为原书的表述过于全面，笔者想做的是用一种更为通俗的方式让大家理解为什么BJT和FET可以构建起电流与电流/电压与电流间的线性关系：既不涉及过多的公式推导，又能让大家理解本质）关于详细的介绍，笔者强烈建议自己去看书：这里的理解更有可能是误人子弟。</p>
+<h2 id="1">1.一点点半导体物理</h2>
+<h3 id="11-pn">1.1 pn结</h3>
+<p><img alt="pn Junction" src="../image-1.png" /></p>
+<p>p区Si中掺杂Al，使得产生空穴；n区Si中掺杂P。使得产生自由电子。由于空穴和自由电子在pn两区的浓度差，会发生扩散运动。由图所示，在耗尽层内部存在内电场，会发生漂移运动，漂移运动相比于扩散运动影响很小，可以忽略。内电场的方向阻碍空穴和自由电子的扩散运动。</p>
+<p>当pn结正偏（n区电势低于p区），耗尽层减小，内电场的阻碍作用减弱，扩散作用加剧，pn结导通；当pn结反偏（n区电势高于p区），耗尽层增大，内电场的阻碍作用加剧，扩散作用减弱，pn结不导通。</p>
+<h3 id="12">1.2 电流密度与浓度梯度的关系</h3>
+<p>下图是一个pn结中，耗尽层外p区n区的少子分布函数图像。</p>
+<p><img alt="alt text" src="../image-2.png" /></p>
+<p>直观上想，因为只考虑空穴和自由电子的扩散运动，所以，电子与空虚运动所产生的电流密度主要与扩散运动有关，因为扩散运动与浓度梯度差有关，所以也就是与自由电子与空穴的浓度梯度有关。浓度梯度差越大，电流密度就越大。浓度梯度反映在浓度分布图（如上图所示）上，就是曲线的斜率。因此电流密度与斜率成正比：（以n为例）</p>
+<p><img alt="alt text" src="../image-7.png" /></p>
+<p>所以某一点的电流也与曲线斜率成正比：</p>
+<p><img alt="alt text" src="../image-6.png" /></p>
+<p>p电流同样满足类似的表达式。</p>
+<h3 id="13">1.3 浓度表达式</h3>
+<p>通过半导体物理知识（不推导），可以知道浓度分布曲线表达式：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">n_p(x) = n_{p0}+n_{p0}(e^{V/V_T}-1)e^{(x+x_p)/L_n}</div>
+<script type="math/tex; mode=display">n_p(x) = n_{p0}+n_{p0}(e^{V/V_T}-1)e^{(x+x_p)/L_n}</script>
+</div>
+<p>所以</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">n_p(x_n) = n_{p0}e^{V/V_T}</div>
+<script type="math/tex; mode=display">n_p(x_n) = n_{p0}e^{V/V_T}</script>
+</div>
+<p>联系1.2里电流的表达式，由于<span class="arithmatex"><span class="MathJax_Preview">e^x</span><script type="math/tex">e^x</script></span>求导的特殊性，可以得到<span class="arithmatex"><span class="MathJax_Preview">I_n</span><script type="math/tex">I_n</script></span>与（<span class="arithmatex"><span class="MathJax_Preview">e^{V/V_T}-1</span><script type="math/tex">e^{V/V_T}-1</script></span>）成正比关系，若<span class="arithmatex"><span class="MathJax_Preview">V&gt;&gt;V_T</span><script type="math/tex">V>>V_T</script></span>，则可以认为<span class="arithmatex"><span class="MathJax_Preview">I_n</span><script type="math/tex">I_n</script></span>、<span class="arithmatex"><span class="MathJax_Preview">I_p</span><script type="math/tex">I_p</script></span>与<span class="arithmatex"><span class="MathJax_Preview">e^{V/V_T}</span><script type="math/tex">e^{V/V_T}</script></span>成正比。</p>
+<h2 id="2-bjt">2. BJT</h2>
 <p>这里以npn为例：</p>
 <p><img alt="BJT" src="../image.png" /></p>
-<p>当EBJ正偏、CBJ结反偏时，BJT工作在放大区。此时BJT的核心工作是，使得<span class="arithmatex"><span class="MathJax_Preview">I_E</span><script type="math/tex">I_E</script></span>和<span class="arithmatex"><span class="MathJax_Preview">I_C</span><script type="math/tex">I_C</script></span>成一定的比例关系，即两个pn结的电流成比例关系。为了达成这一目的，</p>
+<p>当EBJ正偏、CBJ结反偏时，BJT工作在放大区。此时BJT的核心工作是，使得<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>和<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>成一定的比例关系，即两个pn结的电流成比例关系。从1.3可知，通过建立<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>和<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>的比例关系，我们可以通过控制<span class="arithmatex"><span class="MathJax_Preview">v_{be}</span><script type="math/tex">v_{be}</script></span>来控制电流。为了达成这一目的，三极管的三个结有着各自精巧的设计：</p>
+<ul>
+<li>E极：<strong>发射极重掺杂（heavily doped）</strong>，使得E极的自由电子浓度极大。</li>
+<li>B极：<strong>基极掺杂程度很轻（lightly doped）</strong>，使得B极的空穴浓度远小于E极的自由电子浓度。<strong>基极还非常薄</strong>，这一点对于两个pn结的电流成比例关系至关重要。</li>
+<li>C极：<strong>集电极面积非常大</strong>。</li>
+</ul>
+<p>至于为何会有这样的设计，下面将通过工作原理说明。</p>
+<p>BJT工作在放大区时，由于E极电子浓度非常高，在浓度梯度的作用下，E极的自由电子将向BC方向移动，从而形成电流。由于B非常薄且CBJ反偏，大多数移动到B的电子将会进一步移动到C极（一小部分会在B极与其空穴复合），从而形成电流<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>。B中的空穴浓度大于E与C中，由于BCJ反偏，所以B中的空穴只会定向移动到E中，从而也形成一小部分电流，这也使得<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>略大于<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>。</p>
+<p><img alt="alt text" src="../image-25.png" /></p>
+<p>由于BCJ反偏，所以BCJ里BC交界处没有自由电子，交界处B少子浓度为0（由于BCJ反偏，B中的自由电子在电场作用下全部到C里去了，这也就是为什么C的面积要大足以存下所有移动过来的自由电子）。于是我们可以画出BJT的少子分布浓度图。</p>
+<p><img alt="alt text" src="../image-5.png" /></p>
+<p>由图可知，在B区，由于非常薄，其浓度分布曲线近似可以看作一条直线。由1.2中的讨论可知，电流大小与浓度分布图的斜率的成正比。因此，我们可以认为电子形成的电流为：</p>
+<p><img alt="a" src="../image-8.png" /></p>
+<p>由于C区的电流主要来源于电子的移动，所以可以认为<span class="arithmatex"><span class="MathJax_Preview">i_c=I_n</span><script type="math/tex">i_c=I_n</script></span>。</p>
+<p>于是通过将B区浓度梯度曲线近似为直线的方式我们将<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>与<span class="arithmatex"><span class="MathJax_Preview">n_p(0)</span><script type="math/tex">n_p(0)</script></span>建立起了线性关系。由1.2与1.3可知，<span class="arithmatex"><span class="MathJax_Preview">n_p(0)</span><script type="math/tex">n_p(0)</script></span>与<span class="arithmatex"><span class="MathJax_Preview">e^{v_{be}/V_T}</span><script type="math/tex">e^{v_{be}/V_T}</script></span>成正比，也因此与EBJ的电流<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>成正比。<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>与<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>建立起了线性关系。</p>
+<p>所以，整个BJT的工作关键，就是通过将B做的非常薄的方式，使得<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>可以用<span class="arithmatex"><span class="MathJax_Preview">v_{be}</span><script type="math/tex">v_{be}</script></span>去控制。</p>
+<p><strong>换个角度看，我们将<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>看作是<span class="arithmatex"><span class="MathJax_Preview">I_{ne}</span><script type="math/tex">I_{ne}</script></span>和<span class="arithmatex"><span class="MathJax_Preview">I_p</span><script type="math/tex">I_p</script></span>的加和；将<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>看作是<span class="arithmatex"><span class="MathJax_Preview">I_{nc}</span><script type="math/tex">I_{nc}</script></span>。由于B很薄，浓度分布曲线看作直线，可以得到<span class="arithmatex"><span class="MathJax_Preview">I_{nc}=I_{ne}</span><script type="math/tex">I_{nc}=I_{ne}</script></span>。</strong>从这个角度看，由于B的特殊构造，使得<span class="arithmatex"><span class="MathJax_Preview">I_{nc}=I_{ne}</span><script type="math/tex">I_{nc}=I_{ne}</script></span>（也就使得可以通过<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>去控制<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>）；同时，又因为<span class="arithmatex"><span class="MathJax_Preview">I_{ne}</span><script type="math/tex">I_{ne}</script></span>和<span class="arithmatex"><span class="MathJax_Preview">I_p</span><script type="math/tex">I_p</script></span>都与<span class="arithmatex"><span class="MathJax_Preview">e^{v_{be}/V_T}</span><script type="math/tex">e^{v_{be}/V_T}</script></span>成正比，所以<span class="arithmatex"><span class="MathJax_Preview">i_e</span><script type="math/tex">i_e</script></span>与<span class="arithmatex"><span class="MathJax_Preview">i_c</span><script type="math/tex">i_c</script></span>成正比。</p>
+<p>综上，要使得BJT得以在放大区工作，必须满足：</p>
+<ul>
+<li>B区做的非常薄</li>
+<li>EBJ正偏、CBJ反偏</li>
+</ul>
+<h2 id="3fet">3.FET</h2>
+<p>FET的全称是Field-effect transistor，即场效应晶体管。顾名思义，是利用电场来控制晶体管的工作。考虑一个平行板电容器，电场越大，自由电荷越多：让这些自由电荷运动起来就能形成电流。</p>
+<p>下面以n沟道增强型MOSFET为例：</p>
+<p><img alt="alt text" src="../image-15.png" /></p>
+<p>工作时，SB两级相连接地。此时我们先不施加<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>。随着<span class="arithmatex"><span class="MathJax_Preview">v_{GS}</span><script type="math/tex">v_{GS}</script></span>变大，p中的空穴将会不断向下面的衬底运动，使得耗尽层不断变大并向下移动；与此同时，两测n中的自由电子也会不断向p中运动，并最终成一个n沟道。</p>
+<p>增大<span class="arithmatex"><span class="MathJax_Preview">v_{GS}</span><script type="math/tex">v_{GS}</script></span>，当空穴电子数目相同达到平衡时，记此时的<span class="arithmatex"><span class="MathJax_Preview">v_{GS} = v_t(\text threshold)</span><script type="math/tex">v_{GS} = v_t(\text threshold)</script></span>。再增加<span class="arithmatex"><span class="MathJax_Preview">v_{GS}</span><script type="math/tex">v_{GS}</script></span>，n沟道开始形成并导电。所以也称<span class="arithmatex"><span class="MathJax_Preview">v_t</span><script type="math/tex">v_t</script></span>为开启电压。接下来，我们记<span class="arithmatex"><span class="MathJax_Preview">v_{ov} = v_{gs} - v_t</span><script type="math/tex">v_{ov} = v_{gs} - v_t</script></span>。</p>
+<p><img alt="alt text" src="../image-16.png" /></p>
+<p>值得注意的是，此时实际在G极上形成了一个电容：G的金属板与下面形成的沟道形成了一个平行板电容器。根据电容的定义式，我们可以写出自由电子的数目：</p>
+<p><img alt="alt text" src="../image-17.png" /></p>
+<p>其中<span class="arithmatex"><span class="MathJax_Preview">C_{ox}</span><script type="math/tex">C_{ox}</script></span>记为栅氧电容，即单位面积的平行板电容大小。W是沟道宽度、L是沟道长度。</p>
+<p>当n沟道形成后，再增加<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>，自由电子就会开始移动，形成电流。然而，请注意，因为此时D也有了电势，这就使得<span class="arithmatex"><span class="MathJax_Preview">v_{GS}</span><script type="math/tex">v_{GS}</script></span>与<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>不同，也就使得两端导电沟道不对称。</p>
+<p><img alt="a" src="../image-18.png" /></p>
+<p>电压差如下图所示：</p>
+<p><img alt="alt text" src="../image-19.png" /></p>
+<p>单位长度的电荷量则可以表示为：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">|Q| =v_{ov(avg)}C_{ox}W 
+      = (V_{ov}-\frac{1}{2}v_{DS})C_{ox}W
+</div>
+<script type="math/tex; mode=display">|Q| =v_{ov(avg)}C_{ox}W 
+      = (V_{ov}-\frac{1}{2}v_{DS})C_{ox}W
+</script>
+</div>
+<p>由于<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>的存在，横向方向在沟道存在一个电场。电厂的大小为：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">E = \frac{v_{DS}}{L}</div>
+<script type="math/tex; mode=display">E = \frac{v_{DS}}{L}</script>
+</div>
+<p>电子漂移运动速度：</p>
+<p><img alt="alt text" src="../image-20.png" /></p>
+<p>运用<span class="arithmatex"><span class="MathJax_Preview">i=qE</span><script type="math/tex">i=qE</script></span>:</p>
+<p><img alt="alt text" src="../image-21.png" /></p>
+<p>其中<span class="arithmatex"><span class="MathJax_Preview">k^{'}_{n}=C_{ox}\mu_n</span><script type="math/tex">k^{'}_{n}=C_{ox}\mu_n</script></span>.</p>
+<p>当<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>达到<span class="arithmatex"><span class="MathJax_Preview">V_{OV}</span><script type="math/tex">V_{OV}</script></span>时，沟道右侧由于电压原因将会变成如下图:</p>
+<p><img alt="alt text" src="../image-22.png" /></p>
+<p>此时，电流达到最大值：</p>
+<p><img alt="alt text" src="../image-23.png" /></p>
+<p>所以<span class="arithmatex"><span class="MathJax_Preview">i_D</span><script type="math/tex">i_D</script></span>随<span class="arithmatex"><span class="MathJax_Preview">v_{DS}</span><script type="math/tex">v_{DS}</script></span>图像可以表示为如下图：</p>
+<p><img alt="alt text" src="../image-24.png" /></p>
+<p>综上所述，FET的作用就是通过形成的电容中的电场来控制自由电荷的数目，从而控制电流大小。</p>
+<h2 id="4">4.总结</h2>
+<p>无论是BJT还是FET，都是通过特定的构造可以使得通过一端电压/电流去控制另一端电压/电流，使得两者建立不为这两者本身变化的关系。这是后续放大电路建立的前提。至于如何使这个关系从非线性变为线性，则是我们下一篇随笔的内容了：<strong>小信号</strong>。</p>
 
 
 
